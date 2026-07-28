@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yuxuan Hu | Personal Website</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <!-- Top Bar: Language & Theme Toggles -->
+  <header class="top-bar">
+    <div class="top-bar-left"></div>
+    <div class="top-bar-right">
+      <button id="langToggle" class="toggle-btn" aria-label="Switch Language">
+        <span class="lang-zh">中</span>
+        <span class="lang-en active-lang">EN</span>
+      </button>
+      <button id="themeToggle" class="toggle-btn" aria-label="Switch Theme">
+        <i class="fa-solid fa-moon" id="themeIcon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="main-container">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="avatar-wrapper">
+          <img src="profile.jpg" alt="Yuxuan Hu" class="avatar">
+        </div>
+        <h2 class="name">Yuxuan Hu</h2>
+        <p class="title-en title">Ph.D. Student in Microelectronics</p>
+        <p class="title-zh title hidden">微电子学博士研究生</p>
+        <p class="affiliation-en affiliation">HKUST(GZ)</p>
+        <p class="affiliation-zh affiliation hidden">香港科技大学(广州)</p>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <a href="mailto:2153478753@qq.com">2153478753@qq.com</a>
+          </div>
+          <div class="contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>(+86) 13048927822</span>
+          </div>
+          <div class="contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span class="location-en">Guangzhou, China</span>
+            <span class="location-zh hidden">中国·广州</span>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Google Scholar"><i class="fa-brands fa-google-scholar"></i></a>
+          <a href="https://github.com/duckkkkkkkkking" class="social-link" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Content Area -->
+    <main class="content">
+      <!-- Tab Navigation -->
+      <nav class="tab-nav" id="tabNav">
+        <button class="tab-btn active" data-tab="cv">
+          <span class="tab-en">CV</span>
+          <span class="tab-zh hidden">简历</span>
+        </button>
+        <button class="tab-btn" data-tab="gallery">
+          <span class="tab-en">Gallery</span>
+          <span class="tab-zh hidden">相册</span>
+        </button>
+      </nav>
+
+      <!-- Tab Content: CV -->
+      <section class="tab-content active" id="tab-cv">
+        <!-- English CV (from LaTeX) -->
+        <div class="cv-content cv-en" id="cvEn"></div>
+        <!-- Chinese CV (placeholder) -->
+        <div class="cv-content cv-zh hidden" id="cvZh"></div>
+      </section>
+
+      <!-- Tab Content: Gallery -->
+      <section class="tab-content" id="tab-gallery">
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="selfie.jpg" alt="Selfie" loading="lazy">
+            <p class="gallery-caption gallery-caption-en">Selfie</p>
+            <p class="gallery-caption gallery-caption-zh hidden">自拍</p>
+          </div>
+          <div class="gallery-item">
+            <img src="luxembourg.jpg" alt="Luxembourg" loading="lazy">
+            <p class="gallery-caption gallery-caption-en">Luxembourg</p>
+            <p class="gallery-caption gallery-caption-zh hidden">卢森堡</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
