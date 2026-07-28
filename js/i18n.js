@@ -148,7 +148,7 @@ const i18n = {
     // Publications
     pub1: {
       title: "A Lightweight LSTM-Based Open-Set RF Fingerprinting Identification for Edge Deployment",
-      authors: "胡宇轩¹, 付玉桐², 陈烨³,*",
+      authors: "胡宇轩¹, 付玉彤², 陈烨³,*",
       venue: "Scientific Reports (JCR Q1)",
       link: "https://www.nature.com/articles/s41598-025-25417-2"
     },
