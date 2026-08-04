@@ -17,7 +17,7 @@ jobs:
         with:
           host: yuxuanhu.cn
           username: admin
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          key: ${{ secrets.GUANGZHOUSERVERKEYFORPERSONALWEB }}
           script: |
             echo "Testing SSH connection"
             whoami
@@ -31,7 +31,7 @@ jobs:
           remote_path: /var/www/yuxuanhu/
           remote_host: yuxuanhu.cn
           remote_user: admin
-          remote_key: ${{ secrets.DEPLOY_SSH_KEY }}
+          remote_key: ${{ secrets.GUANGZHOUSERVERKEYFORPERSONALWEB }}
           excludes: '".git",".github","Caddyfile"'
 
       - name: Fix directory permissions
@@ -39,5 +39,5 @@ jobs:
         with:
           host: yuxuanhu.cn
           username: admin
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          key: ${{ secrets.GUANGZHOUSERVERKEYFORPERSONALWEB }}
           script: find /var/www/yuxuanhu -type d -exec chmod 755 {} \;
