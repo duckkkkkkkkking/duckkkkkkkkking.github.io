@@ -554,6 +554,29 @@ a:hover {
 }
 
 /* ============================================================
+   ICP Footer
+   ============================================================ */
+.icp-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 4px 0;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  z-index: 90;
+}
+.icp-footer a {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.icp-footer a:hover {
+  color: var(--accent);
+}
+
+/* ============================================================
    Responsive
    ============================================================ */
 @media (max-width: 900px) {
@@ -572,6 +595,9 @@ a:hover {
   }
   .name {
     font-size: 1.3rem;
+  }
+  .sidebar {
+    bottom: 24px;
   }
 }
 
