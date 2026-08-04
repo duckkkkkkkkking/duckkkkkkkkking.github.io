@@ -12,15 +12,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy files via SCP
-        uses: appleboy/scp-action@v0.1.7
+      - name: Deploy files via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: yuxuanhu.cn
           username: admin
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          source: "index.html,css/,js/,profile.jpg,selfie.jpg,luxembourg.jpg"
-          target: "/var/www/yuxuanhu"
-          strip_components: 0
+          script: |
+            echo "Testing SSH connection"
+            whoami
+            ls -la /var/www/yuxuanhu/
+
+      - name: Sync files via rsync over SSH
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete
+          path: ./
+          remote_path: /var/www/yuxuanhu/
+          remote_host: yuxuanhu.cn
+          remote_user: admin
+          remote_key: ${{ secrets.DEPLOY_SSH_KEY }}
+          excludes: '".git",".github","Caddyfile"'
 
       - name: Fix directory permissions
         uses: appleboy/ssh-action@v1.0.3
