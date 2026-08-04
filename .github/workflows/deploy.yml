@@ -12,16 +12,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy files via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: yuxuanhu.cn
-          username: admin
-          key: ${{ secrets.GUANGZHOUSERVERKEYFORPERSONALWEB }}
-          script: |
-            echo "Testing SSH connection"
-            whoami
-            ls -la /var/www/yuxuanhu/
+      - name: Remove unwanted files
+        run: rm -rf .git .github
 
       - name: Sync files via rsync over SSH
         uses: burnett01/rsync-deployments@7.0.1
@@ -32,7 +24,6 @@ jobs:
           remote_host: yuxuanhu.cn
           remote_user: admin
           remote_key: ${{ secrets.GUANGZHOUSERVERKEYFORPERSONALWEB }}
-          excludes: '".git",".github","Caddyfile"'
 
       - name: Fix directory permissions
         uses: appleboy/ssh-action@v1.0.3
