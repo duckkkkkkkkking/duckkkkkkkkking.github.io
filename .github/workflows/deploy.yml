@@ -12,23 +12,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup SSH agent
-        uses: webfactory/ssh-agent@v0.9.1
+      - name: Deploy files via SCP
+        uses: appleboy/scp-action@v0.1.7
         with:
-          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
-
-      - name: Add server to known_hosts
-        run: |
-          ssh-keyscan -H yuxuanhu.cn >> ~/.ssh/known_hosts
-
-      - name: Sync files to server
-        run: |
-          rsync -avz --delete \
-            --exclude '.git' \
-            --exclude '.github' \
-            --exclude 'Caddyfile' \
-            ./ admin@yuxuanhu.cn:/var/www/yuxuanhu/
+          host: yuxuanhu.cn
+          username: admin
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          source: "index.html,css/,js/,profile.jpg,selfie.jpg,luxembourg.jpg"
+          target: "/var/www/yuxuanhu"
+          strip_components: 0
 
       - name: Fix directory permissions
-        run: |
-          ssh admin@yuxuanhu.cn "find /var/www/yuxuanhu -type d -exec chmod 755 {} \;"
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: yuxuanhu.cn
+          username: admin
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: find /var/www/yuxuanhu -type d -exec chmod 755 {} \;
