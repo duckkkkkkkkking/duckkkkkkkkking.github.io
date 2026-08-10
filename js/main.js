@@ -8,6 +8,9 @@
   // --- State ---
   let currentLang = 'en';
   let currentTheme = 'light';
+  // Whether the user has manually chosen a theme. When false, the site
+  // follows the OS/browser preference via prefers-color-scheme.
+  let themeIsManual = false;
 
   // --- DOM References ---
   const html = document.documentElement;
@@ -24,12 +27,46 @@
     const savedLang = localStorage.getItem('site-lang');
     const savedTheme = localStorage.getItem('site-theme');
     if (savedLang === 'zh') currentLang = 'zh';
-    if (savedTheme === 'dark') currentTheme = 'dark';
+
+    // If the user has manually chosen a theme before, honour that choice.
+    // Otherwise, follow the OS/browser preference automatically.
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      currentTheme = savedTheme;
+      themeIsManual = true;
+    } else {
+      currentTheme = getSystemTheme();
+      themeIsManual = false;
+    }
+
+    // Keep following the system preference as it changes, unless the
+    // user has explicitly picked a theme.
+    if (window.matchMedia) {
+      const mql = window.matchMedia('(prefers-color-scheme: dark)');
+      const onSystemChange = (e) => {
+        if (!themeIsManual) {
+          currentTheme = e.matches ? 'dark' : 'light';
+          applyTheme();
+        }
+      };
+      if (typeof mql.addEventListener === 'function') {
+        mql.addEventListener('change', onSystemChange);
+      } else if (typeof mql.addListener === 'function') {
+        mql.addListener(onSystemChange);
+      }
+    }
 
     applyTheme();
     applyLanguage();
     renderCV();
     bindEvents();
+  }
+
+  // Read the current OS/browser color scheme preference.
+  function getSystemTheme() {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
   }
 
   // --- Theme ---
@@ -40,11 +77,15 @@
     } else {
       themeIcon.className = 'fa-solid fa-moon';
     }
-    localStorage.setItem('site-theme', currentTheme);
+    // Persist the choice only when the user picks a theme manually.
+    if (themeIsManual) {
+      localStorage.setItem('site-theme', currentTheme);
+    }
   }
 
   function toggleTheme() {
     currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    themeIsManual = true; // a manual toggle locks in the user's choice
     applyTheme();
   }
 
