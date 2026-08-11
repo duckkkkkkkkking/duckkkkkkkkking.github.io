@@ -344,18 +344,6 @@ a:hover {
   font-weight: 600;
 }
 
-/* External link tab (e.g. Overleaf) */
-.tab-link {
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.external-icon {
-  font-size: 0.7rem;
-  opacity: 0.6;
-}
-
 /* ============================================================
    Tab Content
    ============================================================ */
